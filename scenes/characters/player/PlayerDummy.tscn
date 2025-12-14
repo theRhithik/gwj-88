@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4jyu2smpkf81"]
+
+[ext_resource type="Texture2D" uid="uid://crev2tk3e5j88" path="res://assets/placeholder/Wizard_walk_Right1.png" id="1_qys4d"]
+
+[node name="PlayerDummy" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qys4d")
