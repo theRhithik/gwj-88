@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuudxs5h6h4ky"]
+
+[ext_resource type="Texture2D" uid="uid://lufee2fdj8fc" path="res://Assets/dirt_full_new.png" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://Scenes/player.tscn" id="2_go701"]
+
+[node name="World" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_a02cp")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="player" parent="." instance=ExtResource("2_go701")]
