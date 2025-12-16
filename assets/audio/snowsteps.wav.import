@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c2i6p7iv120d7"
-path="res://.godot/imported/snowsteps.wav-2d57696da49446ac964ff51f752b153f.sample"
+path="res://.godot/imported/snowsteps.wav-b90d6ba85b7f12cf31d20990410f537a.sample"
 
 [deps]
 
-source_file="res://assets/audio/snowsteps.wav"
-dest_files=["res://.godot/imported/snowsteps.wav-2d57696da49446ac964ff51f752b153f.sample"]
+source_file="res://Assets/audio/snowsteps.wav"
+dest_files=["res://.godot/imported/snowsteps.wav-b90d6ba85b7f12cf31d20990410f537a.sample"]
 
 [params]
 

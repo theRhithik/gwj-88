@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://cnpvqq6smich3"]
 
-[ext_resource type="Texture2D" uid="uid://f6ucnl78i27u" path="res://assets/placeholder/basic ground tiles.png" id="1_eslti"]
-[ext_resource type="PackedScene" uid="uid://bkd7d2u5ulv25" path="res://scenes/characters/icicle_beast/icicle_beast.tscn" id="2_1bws4"]
-[ext_resource type="PackedScene" uid="uid://b4jyu2smpkf81" path="res://scenes/characters/player/PlayerDummy.tscn" id="3_1bws4"]
+[ext_resource type="Texture2D" uid="uid://f6ucnl78i27u" path="res://Assets/placeholder/basic ground tiles.png" id="1_eslti"]
+[ext_resource type="PackedScene" uid="uid://bkd7d2u5ulv25" path="res://Scenes/characters/icicle_beast/icicle_beast.tscn" id="2_1bws4"]
+[ext_resource type="PackedScene" uid="uid://b4jyu2smpkf81" path="res://Scenes/characters/player/PlayerDummy.tscn" id="3_1bws4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q8a16"]
 vertices = PackedVector2Array(1157.8438, 646.96875, -2, 644.02344, -2, 2.90625, 1148.1406, -6.90625)
@@ -59,8 +59,8 @@ tile_set = SubResource("TileSet_18y2t")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="IcicleBeast" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(438.00003, 146.00002)
+position = Vector2(575, 228)
 target = NodePath("../../PlayerDummy")
 
 [node name="PlayerDummy" parent="." instance=ExtResource("3_1bws4")]
-position = Vector2(107, 197)
+position = Vector2(405, 226)

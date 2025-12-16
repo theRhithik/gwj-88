@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dritotoh887wt"
-path="res://.godot/imported/ice monster dead.png-c44c92d598e11839c9ba548c51de896c.ctex"
+path="res://.godot/imported/ice monster dead.png-0874574fe951bced25d87d1b4718ba48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/placeholder/ice monster dead.png"
-dest_files=["res://.godot/imported/ice monster dead.png-c44c92d598e11839c9ba548c51de896c.ctex"]
+source_file="res://Assets/placeholder/ice monster dead.png"
+dest_files=["res://.godot/imported/ice monster dead.png-0874574fe951bced25d87d1b4718ba48.ctex"]
 
 [params]
 
