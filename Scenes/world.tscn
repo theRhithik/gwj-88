@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuudxs5h6h4ky"]
+[gd_scene load_steps=5 format=3 uid="uid://cuudxs5h6h4ky"]
 
-[ext_resource type="Texture2D" uid="uid://lufee2fdj8fc" path="res://Assets/dirt_full_new.png" id="1_a02cp"]
-[ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://Scenes/player.tscn" id="2_go701"]
+[ext_resource type="Texture2D" uid="uid://lufee2fdj8fc" path="res://assets/dirt_full_new.png" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://scenes/player.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://bkd7d2u5ulv25" path="res://scenes/characters/icicle_beast/icicle_beast.tscn" id="3_4wyf3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_k0juu"]
+vertices = PackedVector2Array(1956.9297, 1931.0078, -1943, 1936.9766, -1943, -1951.0078, 1933.0625, -1956.9766)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1953, -1961, 1943, -1967, 1967, 1941, -1953, 1947)])
 
 [node name="World" type="Node2D"]
 
@@ -13,3 +19,10 @@ region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
 [node name="player" parent="." instance=ExtResource("2_go701")]
+
+[node name="IcicleBeast" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_4wyf3")]
+position = Vector2(182.99998, -73.99999)
+target = NodePath("../player")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_k0juu")

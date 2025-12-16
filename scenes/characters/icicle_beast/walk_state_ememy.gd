@@ -50,3 +50,7 @@ func _on_enter() -> void:
 func _on_exit() -> void:
 	animated_sprite_2d.stop()
 	audio_stream_player_2d.stop()
+
+
+func _on_hitbox_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

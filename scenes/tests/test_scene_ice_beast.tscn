@@ -59,8 +59,8 @@ tile_set = SubResource("TileSet_18y2t")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="IcicleBeast" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(763.99994, 323.99997)
+position = Vector2(438.00003, 146.00002)
 target = NodePath("../../PlayerDummy")
 
 [node name="PlayerDummy" parent="." instance=ExtResource("3_1bws4")]
-position = Vector2(471, 380)
+position = Vector2(107, 197)
