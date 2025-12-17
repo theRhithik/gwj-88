@@ -30,7 +30,7 @@ func _on_enter() -> void:
 	
 	attack_collision_shape.scale = attack_collision_shape.scale*2
 	attack_collision_shape.disabled=false
-	print(character.name,"playing attack animation")
+	print(character,"playing attack animation")
 	#await  animated_sprite_2d.animation_finished
 	#await get_tree().create_timer(3.0).timeout#placeholder until attack animation is present
 	
