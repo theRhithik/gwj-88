@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkd7d2u5ulv25"]
+[gd_scene load_steps=16 format=3 uid="uid://bkd7d2u5ulv25"]
 
 [ext_resource type="Script" uid="uid://dxcxhbwkn663i" path="res://Scenes/characters/icicle_beast/icicle_beast.gd" id="1_atlwb"]
 [ext_resource type="Texture2D" uid="uid://dcyjaye7tmqe2" path="res://Assets/placeholder/ice monster color.png" id="2_m8ruo"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://drqcmf7svjm0g" path="res://Assets/placeholder/ice monster split.png" id="6_3nv4u"]
 [ext_resource type="Script" uid="uid://d0ukmhmvptg21" path="res://Scenes/characters/icicle_beast/attack_state_enemy.gd" id="6_7v6de"]
 [ext_resource type="Script" uid="uid://7coh4gqjvsfc" path="res://Scenes/characters/icicle_beast/merge_state_enemy.gd" id="7_25y33"]
+[ext_resource type="Script" uid="uid://dceyslqst5ilq" path="res://Scenes/characters/icicle_beast/split_state_enemy.gd" id="7_keyxu"]
 [ext_resource type="Script" uid="uid://8ggpaaky0y3i" path="res://Scenes/characters/icicle_beast/death_state_enemy.gd" id="8_4x1lo"]
 [ext_resource type="AudioStream" uid="uid://c2i6p7iv120d7" path="res://Assets/audio/snowsteps.wav" id="9_7v6de"]
 
@@ -101,6 +102,7 @@ initial_node_state = NodePath("Walk")
 script = ExtResource("8_4x1lo")
 
 [node name="Split" type="Node" parent="StateMachine"]
+script = ExtResource("7_keyxu")
 
 [node name="Merge" type="Node" parent="StateMachine"]
 script = ExtResource("7_25y33")

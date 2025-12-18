@@ -22,6 +22,8 @@ func _on_physics_process(_delta : float) -> void:
 func _on_next_transitions() -> void:
 	if !animated_sprite_2d.is_playing():
 		transition.emit("walk")
+	if character.currentHealth<=0:
+		transition.emit("death")
 
 func _on_enter() -> void:
 	animated_sprite_2d.play("attack")

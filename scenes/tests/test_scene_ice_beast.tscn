@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://cnpvqq6smich3"]
+[gd_scene load_steps=9 format=4 uid="uid://cnpvqq6smich3"]
 
 [ext_resource type="Texture2D" uid="uid://f6ucnl78i27u" path="res://Assets/placeholder/basic ground tiles.png" id="1_eslti"]
 [ext_resource type="PackedScene" uid="uid://bkd7d2u5ulv25" path="res://Scenes/characters/icicle_beast/icicle_beast.tscn" id="2_1bws4"]
-[ext_resource type="PackedScene" uid="uid://b4jyu2smpkf81" path="res://Scenes/characters/player/PlayerDummy.tscn" id="3_1bws4"]
+[ext_resource type="Script" uid="uid://bgrpupn5dij3s" path="res://Scenes/tests/melee_area.gd" id="4_1nkr5"]
 [ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://Scenes/player.tscn" id="4_q8a16"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q8a16"]
@@ -48,6 +48,9 @@ texture = ExtResource("1_eslti")
 [sub_resource type="TileSet" id="TileSet_18y2t"]
 sources/0 = SubResource("TileSetAtlasSource_l5aje")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_baivi"]
+radius = 24.020824
+
 [node name="TestSceneIceBeast" type="Node2D"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -67,24 +70,12 @@ target = NodePath("../../player")
 position = Vector2(550.00006, 134)
 target = NodePath("../../player")
 
-[node name="IcicleBeast3" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(731, 251)
-target = NodePath("../../player")
-
-[node name="IcicleBeast4" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(411.00003, 130)
-target = NodePath("../../player")
-
-[node name="IcicleBeast5" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(337, 293)
-target = NodePath("../../player")
-
-[node name="IcicleBeast6" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(338, 479)
-target = NodePath("../../player")
-
-[node name="PlayerDummy" parent="." instance=ExtResource("3_1bws4")]
-position = Vector2(317, 170)
-
-[node name="player" parent="." instance=ExtResource("4_q8a16")]
+[node name="player" parent="." groups=["player"] instance=ExtResource("4_q8a16")]
 position = Vector2(550, 360)
+
+[node name="Area2D" type="Area2D" parent="player"]
+script = ExtResource("4_1nkr5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/Area2D"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_baivi")
