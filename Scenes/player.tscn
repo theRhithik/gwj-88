@@ -1,40 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhblxwrwsgtua"]
 
+[ext_resource type="Script" uid="uid://bg031jy6ectiu" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://djjj7b0nu36db" path="res://Assets/Player/player_sprite.png" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://d0en0chc1fnvg" path="res://Scenes/gun.tscn" id="2_cvnsp"]
-
-[sub_resource type="GDScript" id="GDScript_v0iea"]
-script/source = "extends CharacterBody2D
-
-#movement code refactor
-func _physics_process(delta: float) -> void:
-	var direction = Input.get_vector(\"left\",\"right\",\"up\",\"down\")
-	velocity = direction * 100
-	move_and_slide()
-
-
-#var movement_speed = 60.0
-#
-#func _physics_process(_delta: float) -> void:
-	#movement()
-	#
-#this function is defining the character movement. 
-#we are listening for Inputs to determine which direction the character moves
-#func movement():
-	#var x_move = Input.get_action_strength(\"right\") - Input.get_action_strength(\"left\")
-	#var y_move = Input.get_action_strength(\"down\") - Input.get_action_strength(\"up\")
-	#var move = Vector2(x_move, y_move)
-	#velocity = move.normalized() * movement_speed
-	#move_and_slide()
-	
-"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
 radius = 8.246211
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
-script = SubResource("GDScript_v0iea")
+script = ExtResource("1_6t5aa")
 
 [node name="Santa" type="Sprite2D" parent="."]
 position = Vector2(-1, -12)
