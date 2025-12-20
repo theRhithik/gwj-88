@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GWJ 88"
-run/main_scene="uid://cnpvqq6smich3"
+run/main_scene="uid://dmwmgym6674ux"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
