@@ -26,6 +26,7 @@ func merge(a, b):
 	merged.position = (a.position + b.position) / 2
 	merged.target=a.target
 	merged.maxHealth = a.maxHealth+1
+	merged.currentHealth = merged.maxHealth
 	merged.speed = a.speed-2
 	merged.hitDamage = a.hitDamage*2
 	merged.scale = a.scale*2
@@ -35,6 +36,6 @@ func merge(a, b):
 	# Put merged character into group and start cooldown
 	merged.add_to_group("enemy")
 	merged.start_cooldown()
-
+	print("spawned ",merged," lvl: ",merged.level," health: ",merged.currentHealth,"/",merged.maxHealth)
 	a.queue_free()
 	b.queue_free()

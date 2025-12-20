@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://cnpvqq6smich3"]
+[gd_scene load_steps=9 format=4 uid="uid://ta1viv7xfach"]
 
-[ext_resource type="Texture2D" uid="uid://f6ucnl78i27u" path="res://Assets/placeholder/basic ground tiles.png" id="1_eslti"]
-[ext_resource type="PackedScene" uid="uid://bkd7d2u5ulv25" path="res://Scenes/characters/icicle_beast/icicle_beast.tscn" id="2_1bws4"]
-[ext_resource type="Script" uid="uid://bgrpupn5dij3s" path="res://Scenes/tests/melee_area.gd" id="4_1nkr5"]
-[ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://Scenes/player.tscn" id="4_q8a16"]
+[ext_resource type="Texture2D" uid="uid://f6ucnl78i27u" path="res://Assets/placeholder/basic ground tiles.png" id="1_swhct"]
+[ext_resource type="PackedScene" uid="uid://dhblxwrwsgtua" path="res://Scenes/player.tscn" id="3_krtit"]
+[ext_resource type="PackedScene" uid="uid://0e5a3r1h2ngp" path="res://scripts/wave_spawner.tscn" id="4_swhct"]
+[ext_resource type="Script" uid="uid://bgrpupn5dij3s" path="res://Scenes/tests/melee_area.gd" id="4_ub5jn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_q8a16"]
 vertices = PackedVector2Array(1157.8438, 646.96875, -2, 644.02344, -2, 2.90625, 1148.1406, -6.90625)
@@ -11,7 +11,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-12, -7, -12, 654, 1168, 657, 1158, -17)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l5aje"]
-texture = ExtResource("1_eslti")
+texture = ExtResource("1_swhct")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -62,20 +62,14 @@ tile_set = SubResource("TileSet_18y2t")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="IcicleBeast" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(532, 245)
-target = NodePath("../../player")
-
-[node name="IcicleBeast2" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("2_1bws4")]
-position = Vector2(550.00006, 134)
-target = NodePath("../../player")
-
-[node name="player" parent="." groups=["player"] instance=ExtResource("4_q8a16")]
+[node name="player" parent="." groups=["player"] instance=ExtResource("3_krtit")]
 position = Vector2(550, 360)
 
 [node name="Area2D" type="Area2D" parent="player"]
-script = ExtResource("4_1nkr5")
+script = ExtResource("4_ub5jn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/Area2D"]
 position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_baivi")
+
+[node name="WaveSpawner" parent="." instance=ExtResource("4_swhct")]
