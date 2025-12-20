@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://dxcxhbwkn663i" path="res://Scenes/characters/icicle_beast/icicle_beast.gd" id="1_atlwb"]
 [ext_resource type="Texture2D" uid="uid://dcyjaye7tmqe2" path="res://Assets/placeholder/ice monster color.png" id="2_m8ruo"]
 [ext_resource type="Script" uid="uid://dd2vdpmlym4nl" path="res://Scenes/characters/icicle_beast/walk_state_ememy.gd" id="4_k5bo1"]
-[ext_resource type="Script" uid="uid://badwh0q0kl515" path="res://scripts/state_machine/node_state_machine.gd" id="5_dfncs"]
+[ext_resource type="Script" uid="uid://badwh0q0kl515" path="res://Scripts/state_machine/node_state_machine.gd" id="5_dfncs"]
 [ext_resource type="Texture2D" uid="uid://dritotoh887wt" path="res://Assets/placeholder/ice monster dead.png" id="5_jo6hc"]
 [ext_resource type="Texture2D" uid="uid://drqcmf7svjm0g" path="res://Assets/placeholder/ice monster split.png" id="6_3nv4u"]
 [ext_resource type="Script" uid="uid://d0ukmhmvptg21" path="res://Scenes/characters/icicle_beast/attack_state_enemy.gd" id="6_7v6de"]
 [ext_resource type="Script" uid="uid://7coh4gqjvsfc" path="res://Scenes/characters/icicle_beast/merge_state_enemy.gd" id="7_25y33"]
-[ext_resource type="Script" uid="uid://dceyslqst5ilq" path="res://Scenes/characters/icicle_beast/split_state_enemy.gd" id="7_keyxu"]
 [ext_resource type="Script" uid="uid://8ggpaaky0y3i" path="res://Scenes/characters/icicle_beast/death_state_enemy.gd" id="8_4x1lo"]
 [ext_resource type="AudioStream" uid="uid://c2i6p7iv120d7" path="res://Assets/audio/snowsteps.wav" id="9_7v6de"]
 
@@ -66,6 +65,48 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_prm7u"]
+script/source = "extends NodeState
+
+@onready var sub_monster:PackedScene=preload(\"res://Scenes/characters/icicle_beast/icicle_beast.tscn\")
+@onready var icicle_beast: CharacterBody2D = $\"../..\"
+var spawn_count:int = 1
+	
+##Pass-through for  proccess function
+func _on_process(_delta : float) -> void:
+	pass
+
+##Pass-through for physics proccess function
+func _on_physics_process(_delta : float) -> void:
+	pass
+
+##Logic goes here to determining when to transistion states
+##call transition.emit(\"StateNodeName\") to specify new state
+func _on_next_transitions() -> void:
+	pass
+
+##Run when first entering the state
+func _on_enter() -> void:
+	for i in spawn_count:
+		var instance=sub_monster.instantiate()
+		instance.level = icicle_beast.level - 1
+		instance.position = icicle_beast.position+Vector2(randf_range(-50,50),randf_range(-50,50))
+		instance.target=icicle_beast.target
+		instance.maxHealth = icicle_beast.maxHealth-1
+		instance.speed = icicle_beast.speed+2
+		instance.hitDamage = icicle_beast.hitDamage/2
+		instance.scale = icicle_beast.scale/2
+		instance.merge_distance = icicle_beast.merge_distance/2
+		get_tree().current_scene.add_child(instance)
+		instance.start_cooldown()
+	transition.emit(\"Death\")
+		
+##Last thing run before transitioning to next state
+func _on_exit() -> void:
+	pass
+	
+"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_25y33"]
 radius = 220.0
 
@@ -74,6 +115,8 @@ radius = 359.99994
 
 [node name="IcicleBeast" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.05, 0.05)
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_atlwb")
 currentHealth = 1
 merge_distance = 25.0
@@ -102,7 +145,7 @@ initial_node_state = NodePath("Walk")
 script = ExtResource("8_4x1lo")
 
 [node name="Split" type="Node" parent="StateMachine"]
-script = ExtResource("7_keyxu")
+script = SubResource("GDScript_prm7u")
 
 [node name="Merge" type="Node" parent="StateMachine"]
 script = ExtResource("7_25y33")
