@@ -5,6 +5,7 @@ extends NodeState
 @onready var collision_shape_2d: CollisionShape2D = $"../../CollisionShape2D"
 @onready var navigation_agent_2d: NavigationAgent2D = $"../../NavigationAgent2D"
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $"../../AudioStreamPlayer2D"
+@onready var hitbox_area: Area2D = $"../../HitboxArea"
 
 @export var attack_distance:float=40
 var target:Node2D
@@ -12,11 +13,10 @@ var target:Node2D
 func _ready() -> void:
 	target = character.target
 	navigation_agent_2d.target_position = target.global_position
-	
+	#hitbox_area.body_entered.connect(_on_hitbox_area_body_entered)
 
 func _on_process(_delta : float) -> void:
 	pass
-
 
 func _on_physics_process(_delta : float) -> void:
 	navigation_agent_2d.target_position = target.global_position
@@ -52,5 +52,7 @@ func _on_exit() -> void:
 	audio_stream_player_2d.stop()
 
 
-func _on_hitbox_area_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+#func _on_hitbox_area_body_entered(body: Node2D) -> void:
+	#if body.is_in_group('enemy') and body.level==character.level and body!=character:
+		#
+		#transition.emit("Merge")
