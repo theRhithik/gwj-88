@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var speed:float=20
 @export var maxHealth:int=1
 @export var hitDamage:int=1
-@export var currentHealth:int
+var currentHealth:int
 var facing:float
 var walk_cycles:int
 var current_walk_cycle:int

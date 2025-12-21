@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkd7d2u5ulv25"]
+[gd_scene load_steps=17 format=3 uid="uid://bkd7d2u5ulv25"]
 
 [ext_resource type="Script" uid="uid://dxcxhbwkn663i" path="res://Scenes/characters/icicle_beast/icicle_beast.gd" id="1_atlwb"]
 [ext_resource type="Texture2D" uid="uid://dcyjaye7tmqe2" path="res://Assets/placeholder/ice monster color.png" id="2_m8ruo"]
 [ext_resource type="Script" uid="uid://dd2vdpmlym4nl" path="res://Scenes/characters/icicle_beast/walk_state_ememy.gd" id="4_k5bo1"]
-[ext_resource type="Script" uid="uid://badwh0q0kl515" path="res://Scripts/state_machine/node_state_machine.gd" id="5_dfncs"]
+[ext_resource type="Script" uid="uid://badwh0q0kl515" path="res://scripts/state_machine/node_state_machine.gd" id="5_dfncs"]
 [ext_resource type="Texture2D" uid="uid://dritotoh887wt" path="res://Assets/placeholder/ice monster dead.png" id="5_jo6hc"]
 [ext_resource type="Texture2D" uid="uid://drqcmf7svjm0g" path="res://Assets/placeholder/ice monster split.png" id="6_3nv4u"]
 [ext_resource type="Script" uid="uid://d0ukmhmvptg21" path="res://Scenes/characters/icicle_beast/attack_state_enemy.gd" id="6_7v6de"]
 [ext_resource type="Script" uid="uid://7coh4gqjvsfc" path="res://Scenes/characters/icicle_beast/merge_state_enemy.gd" id="7_25y33"]
 [ext_resource type="Script" uid="uid://8ggpaaky0y3i" path="res://Scenes/characters/icicle_beast/death_state_enemy.gd" id="8_4x1lo"]
 [ext_resource type="AudioStream" uid="uid://c2i6p7iv120d7" path="res://Assets/audio/snowsteps.wav" id="9_7v6de"]
+[ext_resource type="Script" uid="uid://bgrpupn5dij3s" path="res://Scenes/tests/melee_area.gd" id="12_3toeq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7v6de"]
 radius = 179.99998
@@ -118,8 +119,14 @@ scale = Vector2(0.05, 0.05)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_atlwb")
-currentHealth = 1
-merge_distance = 25.0
+invunerable_cooldown = null
+min_walk_cycle = null
+max_walk_cycle = null
+level = null
+speed = null
+maxHealth = null
+hitDamage = null
+merge_distance = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7.629394e-06, -179.99998)
@@ -163,6 +170,7 @@ character = NodePath("../..")
 stream = ExtResource("9_7v6de")
 
 [node name="AttackArea" type="Area2D" parent="."]
+script = ExtResource("12_3toeq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(-400, -180)

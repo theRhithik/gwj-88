@@ -9,11 +9,12 @@ var player:CharacterBody2D
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
-	wave_machine()
+	call_deferred("wave_machine")
 
 
 func wave_machine():
 	for wave in waves:
+		enemies_in_wave = wave+2
 		print("wave: ",wave)
 		for enemy in enemies_in_wave:
 			var instance:NonPlayableCharacter = enemy_scene.instantiate()
@@ -23,4 +24,4 @@ func wave_machine():
 			get_tree().current_scene.add_child(instance)
 			print(instance," spawned at ",instance.position)
 		await get_tree().create_timer(wave_time).timeout
-		enemies_in_wave = wave+2
+		

@@ -1,25 +1,113 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhblxwrwsgtua"]
+[gd_scene load_steps=16 format=3 uid="uid://dhblxwrwsgtua"]
 
-[ext_resource type="Script" uid="uid://bg031jy6ectiu" path="res://Scripts/player.gd" id="1_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://djjj7b0nu36db" path="res://Assets/Player/player_sprite.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://bg031jy6ectiu" path="res://scripts/player.gd" id="1_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://cvdgrkfbb2bqt" path="res://Assets/Player/santaRun.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://d0en0chc1fnvg" path="res://Scenes/gun.tscn" id="2_cvnsp"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(4, 1, 50, 61)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
+atlas = ExtResource("2_6t5aa")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7dp3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8erm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ek2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx1dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gymyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu2lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyrk")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0iea"]
-radius = 8.246211
+radius = 11.045361
 
 [node name="player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_6t5aa")
 
 [node name="Santa" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-1, -12)
-texture = ExtResource("1_v0iea")
+texture = SubResource("AtlasTexture_vgqql")
 hframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0.24999785, -0.24999785)
+scale = Vector2(0.6484375, 0.6484375)
+sprite_frames = SubResource("SpriteFrames_7dp3o")
+animation = &"run"
+frame_progress = 0.27465978
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_v0iea")
 
 [node name="Gun" parent="." instance=ExtResource("2_cvnsp")]

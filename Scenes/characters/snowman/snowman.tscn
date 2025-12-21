@@ -1,0 +1,143 @@
+[gd_scene load_steps=19 format=3 uid="uid://bq2hebqw6yeaw"]
+
+[ext_resource type="Script" uid="uid://drrf1kwirwsu" path="res://Scenes/characters/snowman/snowman.gd" id="1_5hyn4"]
+[ext_resource type="Texture2D" uid="uid://dritotoh887wt" path="res://Assets/placeholder/ice monster dead.png" id="3_kckst"]
+[ext_resource type="Texture2D" uid="uid://drqcmf7svjm0g" path="res://Assets/placeholder/ice monster split.png" id="4_8f36g"]
+[ext_resource type="Texture2D" uid="uid://burd8mt3p1fwa" path="res://Assets/placeholder/snowman_placeholder.png" id="5_vtw02"]
+[ext_resource type="Script" uid="uid://badwh0q0kl515" path="res://scripts/state_machine/node_state_machine.gd" id="5_ytond"]
+[ext_resource type="Script" uid="uid://yi6kll7cqmnx" path="res://Scenes/characters/snowman/death_state_friend.gd" id="6_8ehmt"]
+[ext_resource type="Script" uid="uid://bhm70ft0k1lbx" path="res://Scenes/characters/snowman/attack_state_friend.gd" id="9_eqqad"]
+[ext_resource type="Script" uid="uid://bgrpupn5dij3s" path="res://Scenes/tests/melee_area.gd" id="10_01h6v"]
+[ext_resource type="Script" uid="uid://hrkwwoedi6ge" path="res://Scenes/characters/snowman/walk_state_friend.gd" id="10_84jxc"]
+[ext_resource type="AudioStream" uid="uid://c2i6p7iv120d7" path="res://Assets/audio/snowsteps.wav" id="11_vqxod"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vtw02"]
+radius = 100.00001
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8o8c"]
+atlas = ExtResource("5_vtw02")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtw02"]
+atlas = ExtResource("5_vtw02")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uqd2"]
+atlas = ExtResource("5_vtw02")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpq5i"]
+atlas = ExtResource("5_vtw02")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ufuw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8o8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtw02")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kckst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kckst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kckst")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8f36g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8f36g")
+}],
+"loop": false,
+"name": &"split",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uqd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpq5i")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_25y33"]
+radius = 199.99997
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7v6de"]
+radius = 159.99998
+
+[node name="Snowman" type="CharacterBody2D"]
+scale = Vector2(0.05, 0.05)
+script = ExtResource("1_5hyn4")
+maxHealth = 5
+currentHealth = 5
+merge_distance = 25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -100)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_vtw02")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -200)
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_7ufuw")
+animation = &"attack"
+autoplay = "walk"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("5_ytond")
+initial_node_state = NodePath("Walk")
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("6_8ehmt")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("9_eqqad")
+character = NodePath("../..")
+
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("10_84jxc")
+character = NodePath("../..")
+attack_distance = 30.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_vqxod")
+
+[node name="AttackArea" type="Area2D" parent="."]
+script = ExtResource("10_01h6v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(200, -120)
+shape = SubResource("CircleShape2D_25y33")
+disabled = true
+debug_color = Color(0.8611081, 0.3392788, 0.33719125, 0.41960785)
+
+[node name="HitboxArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2(-5.421011e-20, -160)
+shape = SubResource("CircleShape2D_7v6de")
+debug_color = Color(0.2880281, 0.6204504, 0.32833862, 0.41960785)
