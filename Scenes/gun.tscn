@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bqgi7rhabbcrj" path="res://Scenes/bullet.tscn" id="3_t6ynv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqrbh"]
-radius = 114.72576
+radius = 104.00481
 
 [node name="Gun" type="Area2D"]
 collision_layer = 0
@@ -27,6 +27,7 @@ unique_name_in_owner = true
 position = Vector2(27, -10)
 
 [node name="Bullet" parent="WeaponPivot/Pistol/ShootingPoint" instance=ExtResource("3_t6ynv")]
+position = Vector2(26.000002, -7)
 rotation = -0.00080475514
 
 [node name="Timer" type="Timer" parent="."]
