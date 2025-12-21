@@ -7,12 +7,11 @@ var damage_cooldown_timer:SceneTreeTimer
 var is_damagable:bool=true
 
 func _ready() -> void:
-	add_to_group("enemy")
+	
 	cooldown_timer = Timer.new()
 	cooldown_timer.one_shot = true
 	add_child(cooldown_timer)
 	hitbox_area.area_entered.connect(on_hitbox_area_entered)
-	currentHealth=maxHealth
 
 func start_cooldown():
 	cooldown_timer.start(MergeManager.merge_cooldown) 
@@ -23,7 +22,8 @@ func is_on_cooldown() -> bool:
 
 
 func on_hitbox_area_entered(area:Node2D):
-	if area.get_parent().is_in_group("player") and area is AttackArea and is_damagable==true:
+	print(self,"hit by",area.name)
+	if area.get_parent().is_in_group("enemy") and area is AttackArea and is_damagable==true:
 		take_damage(area.damage)
 		is_damagable=false
 		await get_tree().create_timer(invunerable_cooldown).timeout

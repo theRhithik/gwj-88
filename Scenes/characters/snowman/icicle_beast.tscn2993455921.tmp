@@ -1,0 +1,119 @@
+[gd_scene load_steps=13 format=3 uid="uid://bkd7d2u5ulv25"]
+
+[ext_resource type="Script" uid="uid://dxcxhbwkn663i" path="res://scenes/characters/icicle_beast/icicle_beast.gd" id="1_atlwb"]
+[ext_resource type="Texture2D" uid="uid://dcyjaye7tmqe2" path="res://assets/placeholder/ice monster color.png" id="2_m8ruo"]
+[ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="3_cs0c0"]
+[ext_resource type="Script" uid="uid://dd2vdpmlym4nl" path="res://scenes/characters/icicle_beast/walk_state_ememy.gd" id="4_k5bo1"]
+[ext_resource type="Texture2D" uid="uid://dritotoh887wt" path="res://assets/placeholder/ice monster dead.png" id="5_jo6hc"]
+[ext_resource type="Texture2D" uid="uid://drqcmf7svjm0g" path="res://assets/placeholder/ice monster split.png" id="6_3nv4u"]
+[ext_resource type="Script" uid="uid://d0ukmhmvptg21" path="res://scenes/characters/icicle_beast/attack_state_enemy.gd" id="6_7v6de"]
+[ext_resource type="Script" uid="uid://8ggpaaky0y3i" path="res://scenes/characters/icicle_beast/death_state_enemy.gd" id="8_4x1lo"]
+[ext_resource type="AudioStream" uid="uid://c2i6p7iv120d7" path="res://assets/audio/snowsteps.wav" id="9_7v6de"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7v6de"]
+radius = 179.99998
+height = 519.9999
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ufuw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m8ruo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_m8ruo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_m8ruo")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jo6hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jo6hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jo6hc")
+}],
+"loop": false,
+"name": &"death",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_3nv4u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3nv4u")
+}],
+"loop": false,
+"name": &"split",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m8ruo")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7v6de"]
+
+[node name="IcicleBeast" type="CharacterBody2D"]
+scale = Vector2(0.05, 0.05)
+script = ExtResource("1_atlwb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.629394e-06, -179.99998)
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_7v6de")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3.8146973e-06, -240)
+sprite_frames = SubResource("SpriteFrames_7ufuw")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("3_cs0c0")
+initial_node_state = NodePath("Walk")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Death" type="Node" parent="StateMachine"]
+script = ExtResource("8_4x1lo")
+
+[node name="Split" type="Node" parent="StateMachine"]
+
+[node name="Merge" type="Node" parent="StateMachine"]
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("6_7v6de")
+character = NodePath("../..")
+
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("character")]
+script = ExtResource("4_k5bo1")
+character = NodePath("../..")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_7v6de")
+
+[node name="HitBoxArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxArea"]
+shape = SubResource("CircleShape2D_7v6de")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_7v6de")

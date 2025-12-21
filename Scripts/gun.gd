@@ -1,4 +1,5 @@
 extends Area2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 func _physics_process(delta: float) -> void:
@@ -9,6 +10,7 @@ func _physics_process(delta: float) -> void:
 
 func shoot():
 	const BULLET = preload("res://Scenes/bullet.tscn")
+	audio_stream_player_2d.play()
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = %ShootingPoint.global_position
 	new_bullet.global_rotation = %ShootingPoint.global_rotation
